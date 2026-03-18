@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: newsdb
+      POSTGRES_USER: newsuser
+      POSTGRES_PASSWORD: newspass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  retrieval:
+    build:
+      context: .
+      dockerfile: retrieval/Dockerfile
+    depends_on:
+      - db
+
+  analysis:
+    build:
+      context: .
+      dockerfile: analysis/Dockerfile
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    depends_on:
+      - retrieval
+      - analysis
+    ports:
+      - "8080:8000"

@@ -1,0 +1,7 @@
+openai-agents
+python-dotenv
+psycopg[binary]
+requests
+fastapi
+uvicorn
+feedparser
