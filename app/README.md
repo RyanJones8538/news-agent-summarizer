@@ -2,17 +2,6 @@ This is a system that uses Docker containers to retrieve items from the Google R
 analyzes trends via agent pipeline. Run docker compose up --build from the news-agent/app folder to start the project.
 Access localhost:8080 to see the UI. The project's structure is:
 
-[ Browser ]
-     |
-     v
-   [ Web ]
-   /     \
-  v       v
-[Retrieval]   [Analysis]
-      \       /
-        v   v
-         [ DB ]
-
 ##CONTAINERS
 -Browser: Provides the UI 
 -Web: Provides the reasoning behind the UI
