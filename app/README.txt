@@ -1,6 +1,7 @@
-This is a system that uses Docker containers to retrieve items from the Google RSS feed of a user-provided topic and
-allows for an analysis of the recent news on said topic to be run. From this folder, run: docker compose up --build ,
-and access localhost:8080 to see the UI. The project's structure is:
+This is a system that uses Docker containers to retrieve items from the Google RSS feed of a user-provided topic, stores it in a PostgreSQL database, and
+analyzes trends via agent pipeline. Run docker compose up --build from the news-agent/app folder to start the project.
+Access localhost:8080 to see the UI. The project's structure is:
+
 [ Browser ]
      |
      v
@@ -12,5 +13,15 @@ and access localhost:8080 to see the UI. The project's structure is:
         v   v
          [ DB ]
 
-Browser provides the UI, web provides the reasoning behind the UI, Retrieval collects articles from the internet,
-Analysis aggregates key pieces of information from these records, and DB provides a shared persistence.
+##CONTAINERS
+-Browser: Provides the UI 
+-Web: Provides the reasoning behind the UI
+-Retrieval: Collects articles from the internet,
+-Analysis: Aggregates key pieces of information from these records
+-DB: Provides a shared persistent memory.
+
+##STACK
+- FastAPI (backend)
+- React + Vite (frontend)
+- PostgreSQL (database)
+- Docker Compose

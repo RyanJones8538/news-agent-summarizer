@@ -3,7 +3,6 @@ from common.db import get_conn
 from common.models import Article, GuardrailOutput, TopicRequest
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 import feedparser
 import os
 import psycopg
@@ -72,14 +71,8 @@ async def fetch_topic(request: TopicRequest):
     Returns:
         explanation of results 
     """
-    topic = request.topic.lower()
-    result = await run_retrieval(topic)
-    return HTMLResponse(f"""
-                        <html>
-                          <body>
-                            <pre>{result}</pre><a href='/'>Back</a>
-                          </body>
-                        </html>""")
+    result = await run_retrieval(request.topic)
+    return result
 
 """
 Definition of response to inappropriate inputs

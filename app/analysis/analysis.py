@@ -3,7 +3,6 @@ from common.db import get_conn
 from common.models import Article, GuardrailOutput, TopicRequest
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 import os
 from pydantic import BaseModel
 
@@ -27,20 +26,14 @@ FUNCTIONS
 @app.post("/analyze")
 async def analyze_topic(request: TopicRequest):
     """
-    Wrapper function to call search process and convert results to readable HTML.
+    Wrapper function to call search process and convert results to JSON.
     Args:
         topic: the topic to search.
     Returns:
-        HTML-formatted result.
+        JSON-formatted result.
     """
-    topic = request.topic.lower()
-    result = await run_analysis(topic)
-    return HTMLResponse(f"""
-                        <html>
-                          <body>
-                            <pre>{result}</pre><a href='/'>Back</a>
-                          </body>
-                        </html>""")
+    result = await run_analysis(request.topic)
+    return result
 
 def articles_to_text(articles: list[Article]) -> str:
     """

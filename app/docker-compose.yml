@@ -31,5 +31,12 @@ services:
     depends_on:
       - retrieval
       - analysis
+      
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    depends_on:
+      - web
     ports:
-      - "8080:8000"
+      - "8080:80"
